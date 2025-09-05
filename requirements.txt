@@ -9,3 +9,5 @@ openai-whisper
 torch
 pytesseract
 easyocr
+fpdf
+
