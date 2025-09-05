@@ -1,0 +1,11 @@
+streamlit
+langdetect
+deep-translator
+gtts
+Pillow
+pydub
+SpeechRecognition
+openai-whisper
+torch
+pytesseract
+easyocr
