@@ -33,3 +33,4 @@ Easily deploy **Lingua** on [Streamlit Cloud](https://streamlit.io/cloud) or any
 # Run locally
 pip install -r requirements.txt
 streamlit run app.py
+
