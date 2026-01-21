@@ -1,33 +1,21 @@
-# 🌍 Lingua – AI Language Detection & Translation
+# 🌍 Lingua - AI Language Detection & Translation
 
-**Lingua** is a modern, AI-powered translation app that makes global communication effortless.  
-With real-time **language detection** and **instant translation**, Lingua helps you connect across cultures — in just one click.
+Lingua is a modern, AI-powered translator that makes global communication effortless.  
+With real-time **language detection** and **instant translation**, Lingua helps you connect across cultures in just one click.
 
----
+### ✨ Features
+- 🔎 Automatic language detection  
+- 🌐 Translate text into multiple languages  
+- ⚡ Fast, simple, and clean Streamlit UI  
+- 🚀 Ready to expand with speech and image support  
 
-## ✨ Features
+### 🛠️ Tech Stack
+- Python + Streamlit  
+- [langdetect](https://pypi.org/project/langdetect/) for language detection  
+- [deep-translator](https://pypi.org/project/deep-translator/) for translation  
 
-- 🔎 **Automatic Language Detection** – Detects the input language instantly.  
-- 🌐 **Multi-Language Translation** – Translates text into multiple languages effortlessly.  
-- ⚡ **Fast & Intuitive UI** – Clean, modern, and lightweight interface built with Streamlit.  
-- 🖼️ **Expandable Architecture** – Ready for image OCR and speech translation support.
-
----
-
-## 🛠️ Tech Stack
-
-| Category | Tools / Libraries |
-|-----------|------------------|
-| **Frontend** | [Streamlit](https://streamlit.io/) |
-| **Language Detection** | [langdetect](https://pypi.org/project/langdetect/) |
-| **Translation Engine** | [deep-translator](https://pypi.org/project/deep-translator/) |
-| **Backend Language** | Python |
-
----
-
-## 🚀 Deployment
-
-Easily deploy **Lingua** on [Streamlit Cloud](https://streamlit.io/cloud) or any Python-supported hosting platform for instant global access.
+### 🚀 Deployment
+Deployed easily on **Streamlit Cloud** for instant global access.
 
 ```bash
 # Run locally
