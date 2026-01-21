@@ -166,3 +166,4 @@ def export_ocr_pdf(ocr_results, output_path="ocr_report.pdf"):
         pdf.multi_cell(0, 6, f"Translated: {translated}")
     pdf.output(output_path)
     return output_path
+    
