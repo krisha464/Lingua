@@ -1,35 +1,43 @@
 # utils/translator.py
-"""
-Simple translator helper.
-Primary backend: deep-translator (GoogleTranslator).
-If transformers are installed later, you can extend to use Marian/M2M models.
-"""
+# Simple wrapper to detect language and translate text.
+# If you have a cloud provider, replace detect_and_translate implementation.
 
-from langdetect import detect, DetectorFactory
-DetectorFactory.seed = 0
+SUPPORTED_LANGS = {
+    "en": "English",
+    "hi": "Hindi",
+    "es": "Spanish",
+    "fr": "French",
+    "de": "German",
+    "auto": "Auto-detect"
+}
 
-from deep_translator import GoogleTranslator
+# try googletrans as optional fallback
+try:
+    from googletrans import Translator as GoogleTranslator
+    _HAS_GOOGLETRANS = True
+    _gt = GoogleTranslator()
+except Exception:
+    _HAS_GOOGLETRANS = False
 
-def detect_language(text: str) -> str:
-    """Return BCP-47-ish language code detected for the text (e.g. 'en', 'hi')."""
-    try:
-        return detect(text)
-    except Exception:
-        return "unknown"
-
-def translate_with_deep_translator(text: str, target: str = "en") -> str:
-    """Translate using deep-translator's Google Translator (simple & reliable)."""
-    return GoogleTranslator(source="auto", target=target).translate(text)
-
-def detect_and_translate(text: str, target: str = "en"):
+def detect_and_translate(text, target_lang="en"):
     """
     Returns (translated_text, detected_lang)
-    Uses deep-translator by default.
+    - If googletrans is installed, uses it.
+    - Otherwise returns input text and 'unknown' as detected language.
     """
-    lang = detect_language(text)
-    try:
-        translated = translate_with_deep_translator(text, target=target)
-    except Exception as e:
-        # If translator fails, return original text as fallback
-        translated = text
-    return translated, lang 
+    if not text:
+        return "", "unknown"
+    if _HAS_GOOGLETRANS:
+        try:
+            # googletrans uses 'dest' param
+            if target_lang == "auto":
+                # just detect and return original
+                det = _gt.detect(text).lang
+                return text, det
+            res = _gt.translate(text, dest=target_lang)
+            detected = res.src
+            return res.text, detected
+        except Exception:
+            pass
+    # fallback: no translation, return original
+    return text, "unknown"

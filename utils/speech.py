@@ -1,9 +1,17 @@
+# utils/speech.py
+"""
+Speech helpers:
+- speech_to_text(uploaded_file) -> transcribed text
+- record_and_translate() -> record mic input, transcribe & translate
+- text_to_speech_bytes(text, lang='en') -> mp3 bytes
+"""
+
 import os
 import tempfile
 from io import BytesIO
 
 # Supported languages for TTS
-SUPPORTED_LANGS = {
+SUPPORTED_SPEECH_LANGS = {
     "en": "English",
     "hi": "Hindi",
     "es": "Spanish",
@@ -57,8 +65,10 @@ try:
 except Exception:
     _HAS_SR = False
 
-def speech_to_text(path: str, lang: str = "en") -> str:
-    """Transcribe audio file path to text."""
+def speech_to_text(uploaded_file, lang: str = "en") -> str:
+    """Transcribe audio file (uploaded_file is Streamlit UploadedFile)."""
+    path = _save_uploaded_file(uploaded_file)
+
     if _HAS_WHISPER:
         try:
             model = whisper.load_model("small")
@@ -94,7 +104,8 @@ try:
 except Exception:
     _HAS_GTTS = False
 
-def text_to_speech(text: str, lang: str = "en") -> bytes:
+def text_to_speech_bytes(text: str, lang: str = "en") -> bytes:
+    """Return MP3 bytes for given text using gTTS."""
     if not _HAS_GTTS:
         raise RuntimeError("gTTS not installed. Run: pip install gTTS")
     bio = BytesIO()
@@ -102,3 +113,4 @@ def text_to_speech(text: str, lang: str = "en") -> bytes:
     tts.write_to_fp(bio)
     bio.seek(0)
     return bio.read()
+
