@@ -61,7 +61,7 @@ except Exception:
 try:
     import speech_recognition as sr
     from pydub import AudioSegment
-    _HAS_SR = True
+    _HAS_SR = True 
 except Exception:
     _HAS_SR = False
 
