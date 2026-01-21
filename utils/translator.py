@@ -41,3 +41,4 @@ def detect_and_translate(text, target_lang="en"):
             pass
     # fallback: no translation, return original
     return text, "unknown"
+    
